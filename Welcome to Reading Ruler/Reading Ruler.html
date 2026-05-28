@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Welcome to Reading Ruler</title>
+	<title>Reading Ruler - Focus Band for Better Reading</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<style>
 		:root {
@@ -11,9 +11,9 @@
 			--rr-white: #ffffff;
 			--rr-ink: #1f2340;
 			--rr-muted: #324266;
-			--rr-soft: #f3f6ff;
-			--rr-card: #ffffff;
 			--rr-line: #cfd5ff;
+			--rr-button: #ff7fa8;
+			--rr-button-hover: #ff6496;
 		}
 		body {
 			font-family: Arial, sans-serif;
@@ -26,27 +26,37 @@
 		header {
 			padding: 40px 20px;
 			text-align: center;
-			background: rgba(255, 255, 255, 0.72);
+			background: rgba(255, 255, 255, 0.65);
 			border-bottom: 1px solid var(--rr-line);
 		}
-		h1 { margin-bottom: 10px; }
+		h1 {
+			margin-bottom: 10px;
+		}
 		section {
 			padding: 30px 20px;
 			max-width: 800px;
 			margin: auto;
-			background: rgba(255, 255, 255, 0.5);
+			background: rgba(255, 255, 255, 0.42);
 			border-bottom: 1px solid var(--rr-line);
 		}
-		.status {
+		.install-btn {
+			display: inline-block;
+			padding: 12px 20px;
+			background: var(--rr-button);
+			color: var(--rr-white);
+			text-decoration: none;
+			border-radius: 6px;
+			font-weight: bold;
+		}
+		.install-btn:hover {
+			background: var(--rr-button-hover);
+		}
+		footer {
 			text-align: center;
-		}
-		.status h2 {
-			margin-top: 0;
-			font-size: 2rem;
-		}
-		.status p {
+			padding: 18px;
+			font-size: 0.95rem;
 			color: var(--rr-muted);
-			margin-bottom: 0;
+			background: rgba(255, 255, 255, 0.72);
 		}
 	</style>
 
@@ -54,14 +64,116 @@
 <body>
 
 	<header>
-		<h1>Welcome to Reading Ruler</h1>
-		<p>Your focus-friendly reading companion is on the way.</p>
+		<h1>Reading Ruler</h1>
+		<p>A horizontal focus band that follows your pointer to improve readability.</p>
 	</header>
 
-	<section class="status">
-		<h2>Page in Proggress</h2>
-		<p>This landing page is currently being built. Please check back soon.</p>
+	<section id="features">
+		<h2>Core Features</h2>
+		<ul>
+			<li>Mouse-following horizontal reading ruler</li>
+			<li>Dimming outside the focus band for better concentration</li>
+			<li>Adjustable ruler height and dim strength</li>
+			<li>Live popup controls with immediate page updates</li>
+			<li>Keyboard shortcuts for fast in-page adjustments</li>
+		</ul>
 	</section>
+
+	<section id="how-to-use">
+		<h2>How to Use</h2>
+		<ol>
+			<li>Click the Reading Ruler extension icon</li>
+			<li>Enable the ruler toggle in the popup</li>
+			<li>Move your pointer to position the focus band</li>
+			<li>Adjust ruler height and dim strength with sliders</li>
+			<li>Use Reset to return to default settings</li>
+		</ol>
+	</section>
+
+	<section id="settings">
+		<h2>Settings and Ranges</h2>
+		<ul>
+			<li>Enabled default: Off</li>
+			<li>Ruler height default: 32px (range 8 to 240px)</li>
+			<li>Dim strength default: 0.4 (range 0.05 to 0.95)</li>
+			<li>Settings key: readingRulerSettings</li>
+			<li>Saved with chrome.storage.sync for profile sync support</li>
+		</ul>
+	</section>
+
+	<section id="shortcuts">
+		<h2>Keyboard Shortcuts</h2>
+		<p>All shortcuts require Ctrl+Shift in page context.</p>
+		<ul>
+			<li>R: Toggle ruler on or off</li>
+			<li>ArrowUp: Increase ruler height by 4px</li>
+			<li>ArrowDown: Decrease ruler height by 4px</li>
+			<li>ArrowLeft: Increase dim strength by 0.05</li>
+			<li>ArrowRight: Decrease dim strength by 0.05</li>
+		</ul>
+	</section>
+
+	<section id="rendering">
+		<h2>Overlay Rendering</h2>
+		<ul>
+			<li>Injects dim overlay, ruler band, and hint popup layers</li>
+			<li>Uses pointer-events: none to avoid blocking page interaction</li>
+			<li>Uses requestAnimationFrame for smooth mouse-follow updates</li>
+			<li>Uses brightening in-band effect with backdrop-filter when supported</li>
+			<li>Falls back to translucent white highlight where needed</li>
+		</ul>
+	</section>
+
+	<section id="compatibility">
+		<h2>Compatibility and Permissions</h2>
+		<p>Built as a Manifest V3 Chrome extension with popup and content script.</p>
+		<p>Uses only the storage permission and runs on all URLs for page overlay behavior.</p>
+	</section>
+
+	<section id="privacy">
+		<h2>Privacy</h2>
+		<p>Preferences are stored in chrome.storage.sync for your browser profile.</p>
+		<p>The extension focuses on visual guidance and does not require data collection for core use.</p>
+	</section>
+
+	<section id="changelog">
+		<h2>Changelog / Updates</h2>
+		<p><strong>v1.1</strong> - Pointer-follow ruler overlay with synced settings, live updates, and keyboard shortcut controls.</p>
+	</section>
+
+	<section id="install">
+		<h2>Install</h2>
+		<a
+			class="install-btn"
+			href="https://chromewebstore.google.com/detail/your-extension-name/abcdefghijklmnopabcdefghijklmnop"
+			target="_blank"
+			rel="noopener noreferrer"
+		>
+			Install on Chrome
+		</a>
+	</section>
+
+	<section id="support">
+		<h2>Support / Contact</h2>
+		<p>Report bugs or request features on GitHub:</p>
+		<a href="https://github.com/codebunny20/ExtensionsbyBunny/issues">GitHub Issues</a>
+	</section>
+
+	<section id="faq">
+		<h2>FAQ</h2>
+		<p><strong>Why is the ruler not visible?</strong><br>
+		Make sure the ruler is enabled in the popup and the page allows content script injection.</p>
+
+		<p><strong>Will this block clicking on websites?</strong><br>
+		No. Overlay layers use pointer-events: none so normal interaction still works.</p>
+
+		<p><strong>Do my settings sync between browsers?</strong><br>
+		Settings sync across contexts tied to the same browser profile that supports sync.</p>
+	</section>
+
+	<footer>
+		<p>© 2026 Reading Ruler Extension</p>
+	</footer>
 
 </body>
 </html>

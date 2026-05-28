@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome to Bunny Book</title>
+    <title>Bunny Book - Cozy Multi-Note Notebook</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         :root {
@@ -11,9 +11,9 @@
             --bb-white: #ffffff;
             --bb-ink: #1f2340;
             --bb-muted: #324266;
-            --bb-soft: #f3f6ff;
-            --bb-card: #ffffff;
             --bb-line: #cfd5ff;
+            --bb-button: #ff7fa8;
+            --bb-button-hover: #ff6496;
         }
         body {
             font-family: Arial, sans-serif;
@@ -26,42 +26,142 @@
         header {
             padding: 40px 20px;
             text-align: center;
-            background: rgba(255, 255, 255, 0.72);
+            background: rgba(255, 255, 255, 0.65);
             border-bottom: 1px solid var(--bb-line);
         }
-        h1 { margin-bottom: 10px; }
+        h1 {
+            margin-bottom: 10px;
+        }
         section {
             padding: 30px 20px;
             max-width: 800px;
             margin: auto;
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.42);
             border-bottom: 1px solid var(--bb-line);
         }
-        .status {
+        .install-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background: var(--bb-button);
+            color: var(--bb-white);
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        .install-btn:hover {
+            background: var(--bb-button-hover);
+        }
+        footer {
             text-align: center;
-        }
-        .status h2 {
-            margin-top: 0;
-            font-size: 2rem;
-        }
-        .status p {
+            padding: 18px;
+            font-size: 0.95rem;
             color: var(--bb-muted);
-            margin-bottom: 0;
+            background: rgba(255, 255, 255, 0.72);
         }
     </style>
-
 </head>
+
 <body>
 
-    <header>
-        <h1>Welcome to Bunny Book</h1>
-        <p>Your cozy browser companion is on the way.</p>
-    </header>
+<header>
+    <h1>Bunny Book</h1>
+    <p>A cozy popup notebook for quick notes, edits, and voice typing.</p>
+</header>
 
-    <section class="status">
-        <h2>Page in Proggress</h2>
-        <p>This landing page is currently being built. Please check back soon.</p>
-    </section>
+<section id="features">
+    <h2>Core Features</h2>
+    <ul>
+        <li>Create and manage multiple notes in one popup</li>
+        <li>Search notes by title or body with instant filtering</li>
+        <li>Edit with manual save and autosave support</li>
+        <li>Export any note body as a .txt file</li>
+        <li>Use voice typing with a built-in Mic/Stop toggle</li>
+    </ul>
+</section>
+
+<section id="how-to-use">
+    <h2>How to Use</h2>
+    <ol>
+        <li>Click the Bunny Book extension icon</li>
+        <li>Press New to start a blank note</li>
+        <li>Add a title and body text</li>
+        <li>Use Save or press Ctrl+S (Cmd+S on Mac)</li>
+        <li>Use Back or Escape to return to your note list</li>
+    </ol>
+</section>
+
+<section id="editor-workflow">
+    <h2>Editor and Notes Workflow</h2>
+    <ul>
+        <li>Notes are sorted by most recently updated</li>
+        <li>Each note shows title, timestamp, and one-line preview</li>
+        <li>Title length is capped at 80 characters</li>
+        <li>Delete uses a confirmation step to avoid accidental removal</li>
+        <li>Autosave runs after a short debounce when content changes</li>
+    </ul>
+</section>
+
+<section id="voice-typing">
+    <h2>Voice Typing</h2>
+    <ul>
+        <li>Uses Web Speech API (SpeechRecognition or webkitSpeechRecognition)</li>
+        <li>Requests microphone access before dictation starts</li>
+        <li>Inserts recognized text at the cursor location</li>
+        <li>Shows live listening feedback in status messages</li>
+        <li>Displays friendly errors when mic access or support is unavailable</li>
+    </ul>
+</section>
+
+<section id="compatibility">
+    <h2>Compatibility and Permissions</h2>
+    <p>Built as a Manifest V3 Chrome extension popup.</p>
+    <p>Uses only the storage permission and stores notes locally via chrome.storage.local.</p>
+</section>
+
+<section id="privacy">
+    <h2>Privacy</h2>
+    <p>Your notes are stored on your device in extension local storage.</p>
+    <p>No background script or content script tracking is required for core usage.</p>
+</section>
+
+<section id="changelog">
+    <h2>Changelog / Updates</h2>
+    <p><strong>v1.0</strong> - Initial release with multi-note editing, autosave, search, export, and voice typing.</p>
+</section>
+
+<section id="install">
+    <h2>Install</h2>
+    <a
+        class="install-btn"
+        href="https://chromewebstore.google.com/detail/your-extension-name/abcdefghijklmnopabcdefghijklmnop"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        Install on Chrome
+    </a>
+</section>
+
+<section id="support">
+    <h2>Support / Contact</h2>
+    <p>Report bugs or request features on GitHub:</p>
+    <a href="https://github.com/codebunny20/ExtensionsbyBunny/issues">GitHub Issues</a>
+</section>
+
+<section id="faq">
+    <h2>FAQ</h2>
+    <p><strong>Where are my notes saved?</strong><br>
+    Notes are saved in chrome.storage.local on your device.</p>
+
+    <p><strong>Can I recover a deleted note?</strong><br>
+    Deletion is permanent after confirmation, so export important notes when needed.</p>
+
+    <p><strong>Why is voice typing not working?</strong><br>
+    Voice typing needs browser speech API support and microphone permission.</p>
+</section>
+
+<footer>
+    <p>© 2026 Bunny Book Extension</p>
+</footer>
 
 </body>
 </html>
