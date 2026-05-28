@@ -1,6 +1,7 @@
 # ExtensionsbyBunny
 
 Welcome to the official Extensions by Bunny hub.
+https://codebunny20.github.io/ExtensionsbyBunny/
 
 This is where I will post:
 - New extension releases and version updates
