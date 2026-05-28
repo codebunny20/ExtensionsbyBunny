@@ -5,13 +5,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Extensions by Bunny</title>
 	<style>
+		@import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap");
+
 		:root {
-			--bg: #f7f7fb;
+			--ink: #0f1a2e;
+			--muted: #273650;
+			--soft: #f3f6ff;
 			--card: #ffffff;
-			--text: #1f2330;
-			--muted: #666c80;
-			--accent: #0f766e;
-			--border: #e5e7ef;
+			--line: #c6d0e7;
+			--trans-blue: #5bcffa;
+			--trans-pink: #f5a9b8;
+			--trans-white: #ffffff;
 		}
 
 		* {
@@ -21,66 +25,231 @@
 		body {
 			margin: 0;
 			min-height: 100vh;
-			font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-			color: var(--text);
-			background: radial-gradient(circle at top left, #eefcf8, var(--bg) 45%);
+			font-family: "Sora", "Segoe UI", sans-serif;
+			color: var(--ink);
+			background:
+				radial-gradient(1200px 520px at 5% -10%, #c7eaff 0%, transparent 58%),
+				radial-gradient(900px 480px at 95% -20%, #ffcdda 0%, transparent 60%),
+				linear-gradient(160deg, #f4f8ff 0%, #edf2ff 100%);
 			display: grid;
 			place-items: center;
-			padding: 24px;
+			padding: 22px;
 		}
 
-		.card {
-			width: min(700px, 100%);
-			background: var(--card);
-			border: 1px solid var(--border);
-			border-radius: 14px;
-			padding: 28px;
-			box-shadow: 0 12px 30px rgba(31, 35, 48, 0.08);
+		.panel {
+			width: min(900px, 100%);
+			background: #ffffff;
+			border: 1px solid #b9c6df;
+			border-radius: 20px;
+			padding: clamp(18px, 4vw, 34px);
+			box-shadow: 0 20px 38px rgba(9, 21, 40, 0.16);
+			animation: float-in 550ms ease both;
+		}
+
+		.badge {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			font-size: 0.78rem;
+			font-weight: 700;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			color: #173d6d;
+			background: #e8f4ff;
+			border: 1px solid #b7d8ff;
+			padding: 8px 10px;
+			border-radius: 999px;
 		}
 
 		h1 {
-			margin: 0 0 10px;
-			font-size: clamp(1.6rem, 3.5vw, 2.1rem);
+			margin: 16px 0 10px;
+			font-size: clamp(1.8rem, 4.4vw, 2.9rem);
+			line-height: 1.08;
+			color: var(--ink);
+			font-weight: 800;
 		}
 
-		p {
-			margin: 0 0 18px;
+		.lead {
+			margin: 0;
 			color: var(--muted);
-			line-height: 1.55;
-		}
-
-		nav {
-			display: grid;
-			gap: 10px;
-		}
-
-		a {
-			color: var(--accent);
-			text-decoration: none;
+			font-size: clamp(1rem, 2.2vw, 1.12rem);
+			line-height: 1.75;
 			font-weight: 600;
-			border: 1px solid var(--border);
-			border-radius: 10px;
-			padding: 12px 14px;
-			background: #fbfffe;
-			transition: background-color 0.15s ease;
+			max-width: 62ch;
 		}
 
-		a:hover {
-			background: #f0fdf9;
+		.grid {
+			margin-top: 24px;
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+			gap: 14px;
+		}
+
+		.tile {
+			display: grid;
+			gap: 8px;
+			text-decoration: none;
+			color: inherit;
+			border: 1px solid #becae0;
+			border-radius: 14px;
+			padding: 16px;
+			background: #f9fbff;
+			transform: translateY(8px);
+			opacity: 0;
+			animation: rise 450ms ease forwards;
+		}
+
+		.tile:nth-child(2) {
+			animation-delay: 100ms;
+		}
+
+		.tile:nth-child(3) {
+			animation-delay: 180ms;
+		}
+
+		.tile:hover {
+			border-color: #88b9f2;
+			box-shadow: 0 12px 24px rgba(60, 118, 194, 0.2);
+		}
+
+		.kicker {
+			font-size: 0.72rem;
+			font-weight: 700;
+			letter-spacing: 0.09em;
+			text-transform: uppercase;
+			color: #214a83;
+		}
+
+		.tile h2 {
+			margin: 0;
+			font-size: 1.1rem;
+			line-height: 1.3;
+			color: var(--ink);
+			font-weight: 700;
+		}
+
+		.tile p {
+			margin: 0;
+			color: var(--muted);
+			font-size: 0.98rem;
+			line-height: 1.65;
+			font-weight: 600;
+		}
+
+		.folder-button {
+			width: 100%;
+			text-align: left;
+			cursor: pointer;
+			font: inherit;
+		}
+
+		.folder-button .kicker::before {
+			content: "Folder";
+		}
+
+		.folder-button:hover h2,
+		.folder-button:focus-visible h2 {
+			color: #183f73;
+		}
+
+		.folder-button:focus-visible {
+			outline: 3px solid var(--trans-pink);
+			outline-offset: 2px;
+		}
+
+		.empty-state {
+			margin-top: 10px;
+			padding: 14px;
+			border: 1px dashed #a5b4d3;
+			border-radius: 12px;
+			color: var(--muted);
+			background: #f7faff;
+			font-weight: 600;
+		}
+
+		.tip {
+			margin-top: 18px;
+			padding: 12px 14px;
+			border-radius: 12px;
+			border: 1px solid #f1a8b8;
+			background: #ffeef2;
+			font-size: 0.94rem;
+			color: #4d273f;
+			font-weight: 600;
+		}
+
+		.tip strong {
+			color: #3d1f33;
+		}
+
+		@keyframes float-in {
+			from {
+				opacity: 0;
+				transform: translateY(16px) scale(0.99);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0) scale(1);
+			}
+		}
+
+		@keyframes rise {
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
 		}
 	</style>
 </head>
 <body>
-	<main class="card">
+	<main class="panel">
+		<span class="badge">Extension Hub</span>
 		<h1>Extensions by Bunny</h1>
-		<p>
-			Your page was loading blank because the file was empty. This starter layout confirms HTML is rendering correctly.
+		<p class="lead">
+			This page is now ready for growth: add folders to one list and they become clickable buttons with hover and keyboard support.
 		</p>
-		<nav aria-label="Project links">
-			<a href="./Privicy%20policy/">Privacy policy folder</a>
-			<a href="./Road%20Maps/">Road maps folder</a>
-			<a href="./Updates/">Updates folder</a>
-		</nav>
+
+		<nav id="extension-grid" class="grid" aria-label="Extension folders"></nav>
+		<div id="empty-state" class="empty-state" hidden>
+			No extension folders are listed yet. Add one in the config block at the bottom of this file.
+		</div>
+
+		<p class="tip"><strong>Quick add:</strong> duplicate one object in <strong>folderConfig</strong> and update <strong>label</strong> plus <strong>href</strong>.</p>
 	</main>
+
+	<script>
+		const folderConfig = [
+			{
+				label: "Welcome to Auto Scroll",
+				href: "./Welcome%20to%20Auto%20Scroll/Auto%20scroll.html",
+				description: "Open the extension folder and explore its files."
+			}
+		];
+
+		const extensionGrid = document.getElementById("extension-grid");
+		const emptyState = document.getElementById("empty-state");
+
+		if (extensionGrid && emptyState) {
+			if (folderConfig.length === 0) {
+				emptyState.hidden = false;
+			} else {
+				folderConfig.forEach((folder, index) => {
+					const button = document.createElement("button");
+					button.type = "button";
+					button.className = "tile folder-button";
+					button.style.animationDelay = `${80 + index * 90}ms`;
+					button.innerHTML = `
+						<span class="kicker"></span>
+						<h2>${folder.label}</h2>
+						<p>${folder.description || "Open this extension folder."}</p>
+					`;
+					button.addEventListener("click", () => {
+						window.location.href = folder.href;
+					});
+					extensionGrid.appendChild(button);
+				});
+			}
+		}
+	</script>
 </body>
 </html>
