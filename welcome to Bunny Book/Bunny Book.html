@@ -2,23 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Bunny Book - Cozy Multi-Note Notebook</title>
+    <title>🐰Bunny Book - Cozy Multi-Note Notebook</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         :root {
-            --bb-blue: #55cdfc;
-            --bb-pink: #f7a8b8;
-            --bb-white: #ffffff;
-            --bb-ink: #1f2340;
-            --bb-muted: #324266;
-            --bb-line: #cfd5ff;
-            --bb-button: #ff7fa8;
-            --bb-button-hover: #ff6496;
+            --tf-blue: #55cdfc;
+            --tf-pink: #f7a8b8;
+            --tf-white: #ffffff;
+            --tf-ink: #1f2340;
+            --tf-border: #cfd5ff;
+            --tf-button: #ff7fa8;
+            --tf-button-hover: #ff6496;
         }
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(180deg, var(--bb-blue) 0%, var(--bb-white) 50%, var(--bb-pink) 100%);
-            color: var(--bb-ink);
+            background: linear-gradient(180deg, var(--tf-blue) 0%, var(--tf-white) 50%, var(--tf-pink) 100%);
+            color: var(--tf-ink);
             margin: 0;
             padding: 0;
             line-height: 1.6;
@@ -27,36 +26,27 @@
             padding: 40px 20px;
             text-align: center;
             background: rgba(255, 255, 255, 0.65);
-            border-bottom: 1px solid var(--bb-line);
+            border-bottom: 1px solid var(--tf-border);
         }
-        h1 {
-            margin-bottom: 10px;
-        }
+        h1 { margin-bottom: 10px; }
         section {
             padding: 30px 20px;
             max-width: 800px;
             margin: auto;
             background: rgba(255, 255, 255, 0.42);
-            border-bottom: 1px solid var(--bb-line);
+            border-bottom: 1px solid var(--tf-border);
         }
         .install-btn {
             display: inline-block;
             padding: 12px 20px;
-            background: var(--bb-button);
-            color: var(--bb-white);
+            background: var(--tf-button);
+            color: white;
             text-decoration: none;
             border-radius: 6px;
             font-weight: bold;
         }
         .install-btn:hover {
-            background: var(--bb-button-hover);
-        }
-        footer {
-            text-align: center;
-            padding: 18px;
-            font-size: 0.95rem;
-            color: var(--bb-muted);
-            background: rgba(255, 255, 255, 0.72);
+            background: var(--tf-button-hover);
         }
     </style>
 </head>
@@ -64,7 +54,7 @@
 <body>
 
 <header>
-    <h1>Bunny Book</h1>
+    <h1>🐰📕Bunny Book</h1>
     <p>A cozy popup notebook for quick notes, edits, and voice typing.</p>
 </header>
 
@@ -75,12 +65,12 @@
         <li>Search notes by title or body with instant filtering</li>
         <li>Edit with manual save and autosave support</li>
         <li>Export any note body as a .txt file</li>
-        <li>Use voice typing with a built-in Mic/Stop toggle</li>
+        <li>Use voice typing with a built-in Mic/Stop toggle (🚧feature in progress and may not be fully functional)</li>
     </ul>
 </section>
 
 <section id="how-to-use">
-    <h2>How to Use</h2>
+    <h2>❓How to Use</h2>
     <ol>
         <li>Click the Bunny Book extension icon</li>
         <li>Press New to start a blank note</li>
@@ -104,11 +94,8 @@
 <section id="voice-typing">
     <h2>Voice Typing</h2>
     <ul>
-        <li>Uses Web Speech API (SpeechRecognition or webkitSpeechRecognition)</li>
-        <li>Requests microphone access before dictation starts</li>
-        <li>Inserts recognized text at the cursor location</li>
-        <li>Shows live listening feedback in status messages</li>
-        <li>Displays friendly errors when mic access or support is unavailable</li>
+        <li>The voice typing feature is still in development and may not be fully functional in all browsers.</li>
+
     </ul>
 </section>
 
@@ -119,21 +106,22 @@
 </section>
 
 <section id="privacy">
-    <h2>Privacy</h2>
+    <h2>🔒Privacy</h2>
     <p>Your notes are stored on your device in extension local storage.</p>
     <p>No background script or content script tracking is required for core usage.</p>
 </section>
 
 <section id="changelog">
     <h2>Changelog / Updates</h2>
-    <p><strong>v1.0</strong> - Initial release with multi-note editing, autosave, search, export, and voice typing.</p>
+    <p><strong>v1.0</strong> - Initial release with multi-note editing, autosave, search, voice typing feature in progress.</p>
+    <p>Many more improvements and quality-of-life updates are coming.</p>
 </section>
 
 <section id="install">
-    <h2>Install</h2>
+    <h2>⏬Install</h2>
     <a
         class="install-btn"
-        href="https://chromewebstore.google.com/detail/your-extension-name/abcdefghijklmnopabcdefghijklmnop"
+        href="https://chromewebstore.google.com/detail/meojmfeidmpdddebfjpfbadhhojampok?utm_source=item-share-cb"
         target="_blank"
         rel="noopener noreferrer"
     >
@@ -156,7 +144,7 @@
     Deletion is permanent after confirmation, so export important notes when needed.</p>
 
     <p><strong>Why is voice typing not working?</strong><br>
-    Voice typing needs browser speech API support and microphone permission.</p>
+    Voice typing is still being developed and may not be fully functional in all browsers.</p>
 </section>
 
 <footer>
