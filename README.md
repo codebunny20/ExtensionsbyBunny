@@ -14,8 +14,8 @@ This is where I will post:
   https://chromewebstore.google.com/detail/bunny-book/meojmfeidmpdddebfjpfbadhhojampok
   - Reading Ruler
   https://chromewebstore.google.com/detail/reading-ruler/pagchebmocafbblcgkoloijoagjmpagm
-  - Auto Scroll is
-  Still pending
+  - Auto Scroll
+  https://chromewebstore.google.com/detail/fkddbgkhajohfjdacldgagfdfckejdni?utm_source=item-share-cb
 
 If you want to stay informed about what is new and what is coming next, this is the main place to check.
 
