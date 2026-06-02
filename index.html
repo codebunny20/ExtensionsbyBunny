@@ -4,6 +4,27 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Extensions by Bunny</title>
+	<script>
+		(() => {
+			const key = "bunny-theme";
+			let theme = "light";
+
+			try {
+				const savedTheme = localStorage.getItem(key);
+				if (savedTheme === "dark" || savedTheme === "light") {
+					theme = savedTheme;
+				} else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+					theme = "dark";
+				}
+			} catch (_error) {
+				if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+					theme = "dark";
+				}
+			}
+
+			document.documentElement.setAttribute("data-theme", theme);
+		})();
+	</script>
 	<style>
 		@import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap");
 
@@ -13,9 +34,66 @@
 			--soft: #f3f6ff;
 			--card: #ffffff;
 			--line: #c6d0e7;
+			--panel-border: #b9c6df;
+			--panel-shadow: rgba(9, 21, 40, 0.16);
+			--badge-ink: #173d6d;
+			--badge-bg: #e8f4ff;
+			--badge-line: #b7d8ff;
+			--tile-line: #becae0;
+			--tile-bg: #f9fbff;
+			--tile-hover-line: #88b9f2;
+			--tile-hover-shadow: rgba(60, 118, 194, 0.2);
+			--kicker-ink: #214a83;
+			--empty-line: #a5b4d3;
+			--empty-bg: #f7faff;
+			--announce-line: #becae0;
+			--announce-bg: #f9fbff;
+			--announce-control-bg: #ffffff;
+			--toggle-line: #a8b9d8;
+			--toggle-bg: #ffffff;
+			--toggle-hover: #eef4ff;
+			--bg-radial-a: #c7eaff;
+			--bg-radial-b: #ffcdda;
+			--bg-start: #f4f8ff;
+			--bg-end: #edf2ff;
 			--trans-blue: #5bcffa;
 			--trans-pink: #f5a9b8;
 			--trans-white: #ffffff;
+		}
+
+		html {
+			color-scheme: light;
+		}
+
+		html[data-theme="dark"] {
+			color-scheme: dark;
+			--ink: #e6eeff;
+			--muted: #b8c7e8;
+			--soft: #0f1728;
+			--card: #162238;
+			--line: #30425f;
+			--panel-border: #3a4f71;
+			--panel-shadow: rgba(2, 8, 20, 0.45);
+			--badge-ink: #deecff;
+			--badge-bg: #233a5f;
+			--badge-line: #446491;
+			--tile-line: #41597d;
+			--tile-bg: #1a2a45;
+			--tile-hover-line: #7cb3ff;
+			--tile-hover-shadow: rgba(14, 35, 68, 0.5);
+			--kicker-ink: #9ec3ff;
+			--empty-line: #4a6287;
+			--empty-bg: #1a2a45;
+			--announce-line: #41597d;
+			--announce-bg: #1a2a45;
+			--announce-control-bg: #0f1a2e;
+			--toggle-line: #506a92;
+			--toggle-bg: #0f1a2e;
+			--toggle-hover: #1c2b47;
+			--bg-radial-a: #11335d;
+			--bg-radial-b: #4a2338;
+			--bg-start: #0a1222;
+			--bg-end: #0e1830;
 		}
 
 		* {
@@ -28,22 +106,32 @@
 			font-family: "Sora", "Segoe UI", sans-serif;
 			color: var(--ink);
 			background:
-				radial-gradient(1200px 520px at 5% -10%, #c7eaff 0%, transparent 58%),
-				radial-gradient(900px 480px at 95% -20%, #ffcdda 0%, transparent 60%),
-				linear-gradient(160deg, #f4f8ff 0%, #edf2ff 100%);
+				radial-gradient(1200px 520px at 5% -10%, var(--bg-radial-a) 0%, transparent 58%),
+				radial-gradient(900px 480px at 95% -20%, var(--bg-radial-b) 0%, transparent 60%),
+				linear-gradient(160deg, var(--bg-start) 0%, var(--bg-end) 100%);
 			display: grid;
 			place-items: center;
 			padding: 22px;
+			transition: background 240ms ease, color 240ms ease;
 		}
 
 		.panel {
 			width: min(900px, 100%);
-			background: #ffffff;
-			border: 1px solid #b9c6df;
+			background: var(--card);
+			border: 1px solid var(--panel-border);
 			border-radius: 20px;
 			padding: clamp(18px, 4vw, 34px);
-			box-shadow: 0 20px 38px rgba(9, 21, 40, 0.16);
+			box-shadow: 0 20px 38px var(--panel-shadow);
 			animation: float-in 550ms ease both;
+			transition: background-color 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
+		}
+
+		.panel-head {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 12px;
+			flex-wrap: wrap;
 		}
 
 		.badge {
@@ -54,11 +142,33 @@
 			font-weight: 700;
 			letter-spacing: 0.08em;
 			text-transform: uppercase;
-			color: #173d6d;
-			background: #e8f4ff;
-			border: 1px solid #b7d8ff;
+			color: var(--badge-ink);
+			background: var(--badge-bg);
+			border: 1px solid var(--badge-line);
 			padding: 8px 10px;
 			border-radius: 999px;
+		}
+
+		.theme-toggle {
+			cursor: pointer;
+			font: inherit;
+			font-weight: 700;
+			font-size: 0.84rem;
+			padding: 8px 12px;
+			border-radius: 999px;
+			border: 1px solid var(--toggle-line);
+			background: var(--toggle-bg);
+			color: var(--ink);
+			transition: background-color 180ms ease, border-color 180ms ease;
+		}
+
+		.theme-toggle:hover {
+			background: var(--toggle-hover);
+		}
+
+		.theme-toggle:focus-visible {
+			outline: 3px solid var(--trans-pink);
+			outline-offset: 2px;
 		}
 
 		h1 {
@@ -90,13 +200,14 @@
 			gap: 8px;
 			text-decoration: none;
 			color: inherit;
-			border: 1px solid #becae0;
+			border: 1px solid var(--tile-line);
 			border-radius: 14px;
 			padding: 16px;
-			background: #f9fbff;
+			background: var(--tile-bg);
 			transform: translateY(8px);
 			opacity: 0;
 			animation: rise 450ms ease forwards;
+			transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
 		}
 
 		.tile:nth-child(2) {
@@ -108,8 +219,8 @@
 		}
 
 		.tile:hover {
-			border-color: #88b9f2;
-			box-shadow: 0 12px 24px rgba(60, 118, 194, 0.2);
+			border-color: var(--tile-hover-line);
+			box-shadow: 0 12px 24px var(--tile-hover-shadow);
 		}
 
 		.kicker {
@@ -117,7 +228,7 @@
 			font-weight: 700;
 			letter-spacing: 0.09em;
 			text-transform: uppercase;
-			color: #214a83;
+			color: var(--kicker-ink);
 		}
 
 		.tile h2 {
@@ -145,7 +256,7 @@
 
 		.folder-button:hover h2,
 		.folder-button:focus-visible h2 {
-			color: #183f73;
+			color: var(--kicker-ink);
 		}
 
 		.folder-button:focus-visible {
@@ -156,11 +267,144 @@
 		.empty-state {
 			margin-top: 10px;
 			padding: 14px;
-			border: 1px dashed #a5b4d3;
+			border: 1px dashed var(--empty-line);
 			border-radius: 12px;
 			color: var(--muted);
-			background: #f7faff;
+			background: var(--empty-bg);
 			font-weight: 600;
+		}
+
+		#announcement-wrap {
+			margin-top: 20px;
+			padding: 12px;
+			border: 1px solid var(--announce-line);
+			border-radius: 12px;
+			background: var(--announce-bg);
+			display: grid;
+			gap: 12px;
+			transition: background-color 180ms ease, border-color 180ms ease;
+		}
+
+		#announcement-wrap label {
+			font-size: 0.8rem;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			font-weight: 700;
+			color: var(--kicker-ink);
+		}
+
+		.announcement-latest {
+			padding: 12px;
+			border-radius: 10px;
+			border: 1px solid var(--line);
+			background: var(--announce-control-bg);
+		}
+
+		.announcement-meta {
+			margin: 0 0 6px;
+			font-size: 0.78rem;
+			letter-spacing: 0.05em;
+			text-transform: uppercase;
+			font-weight: 700;
+			color: var(--kicker-ink);
+		}
+
+		#latest-announcement-title {
+			margin: 0;
+			font-size: 1rem;
+			line-height: 1.35;
+			font-weight: 700;
+			color: var(--ink);
+		}
+
+		#latest-announcement-message {
+			margin: 8px 0 0;
+			font-size: 0.95rem;
+			line-height: 1.6;
+			color: var(--muted);
+		}
+
+		#latest-announcement-link {
+			display: inline-block;
+			margin-top: 10px;
+			font-size: 0.88rem;
+			font-weight: 700;
+			color: var(--kicker-ink);
+			text-decoration: none;
+		}
+
+		#latest-announcement-link:hover,
+		#latest-announcement-link:focus-visible {
+			text-decoration: underline;
+		}
+
+		.announcement-archive {
+			border: 1px solid var(--line);
+			border-radius: 10px;
+			padding: 10px 12px;
+			background: var(--announce-control-bg);
+		}
+
+		.announcement-archive summary {
+			cursor: pointer;
+			font-size: 0.88rem;
+			font-weight: 700;
+			color: var(--ink);
+		}
+
+		#announcement-archive-list {
+			list-style: none;
+			margin: 10px 0 0;
+			padding: 0;
+			display: grid;
+			gap: 10px;
+		}
+
+		#announcement-archive-list li {
+			border: 1px solid var(--line);
+			border-radius: 10px;
+			padding: 10px;
+			background: var(--announce-bg);
+		}
+
+		#announcement-archive-list h3 {
+			margin: 0;
+			font-size: 0.95rem;
+			line-height: 1.35;
+			font-weight: 700;
+			color: var(--ink);
+		}
+
+		#announcement-archive-list p {
+			margin: 6px 0 0;
+			font-size: 0.9rem;
+			line-height: 1.55;
+			color: var(--muted);
+		}
+
+		#announcement-archive-list a {
+			display: inline-block;
+			margin-top: 8px;
+			font-size: 0.84rem;
+			font-weight: 700;
+			color: var(--kicker-ink);
+			text-decoration: none;
+		}
+
+		#announcement-archive-list a:hover,
+		#announcement-archive-list a:focus-visible {
+			text-decoration: underline;
+		}
+
+		@media (max-width: 640px) {
+			#announcement-wrap {
+				padding: 10px;
+			}
+
+			.announcement-latest,
+			.announcement-archive {
+				padding: 10px;
+			}
 		}
 
 		.tip {
@@ -199,12 +443,29 @@
 </head>
 <body>
 	<main class="panel">
-		<span class="badge">Extension Hub</span>
+		<div class="panel-head">
+			<span class="badge">Extension Hub</span>
+			<button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false">Dark mode: Off</button>
+		</div>
 		<h1>Extensions by Bunny</h1>
 		<p class="lead">
 			This page is where you can explore all the extensions created by Bunny.
             I hope these tools might help anyone who needs them.
 		</p>
+
+		<div id="announcement-wrap" hidden>
+			<label>Big Announcements</label>
+			<section class="announcement-latest" aria-label="Latest announcement">
+				<p class="announcement-meta" id="latest-announcement-date"></p>
+				<h2 id="latest-announcement-title"></h2>
+				<p id="latest-announcement-message"></p>
+				<a id="latest-announcement-link" href="#" hidden>Read full announcement</a>
+			</section>
+			<details class="announcement-archive">
+				<summary>Older announcements</summary>
+				<ul id="announcement-archive-list"></ul>
+			</details>
+		</div>
 
 		<nav id="extension-grid" class="grid" aria-label="Extension folders"></nav>
 		<div id="empty-state" class="empty-state" hidden>
@@ -214,6 +475,54 @@
 	</main>
 
 	<script>
+		const THEME_STORAGE_KEY = "bunny-theme";
+
+		function applyTheme(theme) {
+			document.documentElement.setAttribute("data-theme", theme);
+		}
+
+		function resolveInitialTheme() {
+			try {
+				const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+				if (savedTheme === "dark" || savedTheme === "light") {
+					return savedTheme;
+				}
+			} catch (_error) {
+				// Ignore storage failures and fall back to system preference.
+			}
+
+			const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+			return prefersDark ? "dark" : "light";
+		}
+
+		const themeToggle = document.getElementById("theme-toggle");
+		let currentTheme = document.documentElement.getAttribute("data-theme") || resolveInitialTheme();
+		applyTheme(currentTheme);
+
+		function syncThemeToggle() {
+			if (!themeToggle) {
+				return;
+			}
+			const isDark = currentTheme === "dark";
+			themeToggle.setAttribute("aria-pressed", String(isDark));
+			themeToggle.textContent = isDark ? "Dark mode: On" : "Dark mode: Off";
+		}
+
+		syncThemeToggle();
+
+		if (themeToggle) {
+			themeToggle.addEventListener("click", () => {
+				currentTheme = currentTheme === "dark" ? "light" : "dark";
+				applyTheme(currentTheme);
+				try {
+					localStorage.setItem(THEME_STORAGE_KEY, currentTheme);
+				} catch (_error) {
+					// Ignore storage failures so toggle still works for this session.
+				}
+				syncThemeToggle();
+			});
+		}
+
 		const folderConfig = [
 			{
 				label: "Welcome to Auto Scroll",
@@ -255,6 +564,110 @@
 					extensionGrid.appendChild(button);
 				});
 			}
+		}
+
+		const bigAnnouncementConfig = [
+			{
+				label: "Donations are now open on Ko-fi",
+				date: "2026-06-02",
+				message: "I finally got donations set up through my Ko-fi. This gives anyone who wants to support me, my work, my projects, and my transition a simple way to do it. Thank you to anyone who chooses to help. It means more than you know.",
+				href: "https://ko-fi.com/queencodebunny"
+			},
+			{
+				label: "June 2026 Update",
+				date: "2026-06-01",
+				message: "Auto Scroll improvements are live and more updates are coming.",
+				href: ""
+			},
+			{
+				label: "Bunny Book News",
+				date: "2026-05-18",
+				message: "New features are being tested now.",
+				href: ""
+			},
+			{
+				label: "Reading Ruler polish update",
+				date: "2026-04-22",
+				message: "Smoother behavior and readability improvements are rolling out.",
+				href: ""
+			}
+		];
+
+		const announcementWrap = document.getElementById("announcement-wrap");
+		const latestAnnouncementDate = document.getElementById("latest-announcement-date");
+		const latestAnnouncementTitle = document.getElementById("latest-announcement-title");
+		const latestAnnouncementMessage = document.getElementById("latest-announcement-message");
+		const latestAnnouncementLink = document.getElementById("latest-announcement-link");
+		const announcementArchiveList = document.getElementById("announcement-archive-list");
+
+		if (
+			announcementWrap &&
+			latestAnnouncementDate &&
+			latestAnnouncementTitle &&
+			latestAnnouncementMessage &&
+			latestAnnouncementLink &&
+			announcementArchiveList &&
+			bigAnnouncementConfig.length > 0
+		) {
+			announcementWrap.hidden = false;
+
+			const sortedAnnouncements = [...bigAnnouncementConfig].sort((a, b) => {
+				const aTime = Date.parse(a.date || "");
+				const bTime = Date.parse(b.date || "");
+				const safeATime = Number.isNaN(aTime) ? 0 : aTime;
+				const safeBTime = Number.isNaN(bTime) ? 0 : bTime;
+				return safeBTime - safeATime;
+			});
+
+			const latest = sortedAnnouncements[0];
+			const dateText = latest.date ? new Date(latest.date).toLocaleDateString(undefined, {
+				year: "numeric",
+				month: "long",
+				day: "numeric"
+			}) : "Latest";
+
+			latestAnnouncementDate.textContent = `Latest - ${dateText}`;
+			latestAnnouncementTitle.textContent = latest.label || "Latest announcement";
+			latestAnnouncementMessage.textContent = latest.message || "";
+
+			if (latest.href) {
+				latestAnnouncementLink.hidden = false;
+				latestAnnouncementLink.href = latest.href;
+			} else {
+				latestAnnouncementLink.hidden = true;
+			}
+
+			sortedAnnouncements.slice(1).forEach((item) => {
+				const li = document.createElement("li");
+				const heading = document.createElement("h3");
+				heading.textContent = item.label || "Announcement";
+
+				const date = document.createElement("p");
+				date.className = "announcement-meta";
+				date.textContent = item.date ? new Date(item.date).toLocaleDateString(undefined, {
+					year: "numeric",
+					month: "long",
+					day: "numeric"
+				}) : "";
+
+				const message = document.createElement("p");
+				message.textContent = item.message || "";
+
+				li.appendChild(heading);
+				if (date.textContent) {
+					li.appendChild(date);
+				}
+				li.appendChild(message);
+
+				if (item.href) {
+					const link = document.createElement("a");
+					link.href = item.href;
+					link.textContent = "Read full announcement";
+					li.appendChild(link);
+				}
+
+				announcementArchiveList.appendChild(li);
+			});
 		}
 	</script>
 </body>
