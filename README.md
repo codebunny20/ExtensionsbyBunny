@@ -13,8 +13,8 @@ This is where I post:
 
 ## Chrome Web Store Listings
 
-- Bunny Book: https://chromewebstore.google.com/detail/bunny-book/meojmfeidmpdddebfjpfbadhhojampok
-- Reading Ruler: https://chromewebstore.google.com/detail/reading-ruler/pagchebmocafbblcgkoloijoagjmpagm
+- Bunny Book: https://chromewebstore.google.com/detail/meojmfeidmpdddebfjpfbadhhojampok?utm_source=item-share-cb
+- Reading Ruler: https://chromewebstore.google.com/detail/pagchebmocafbblcgkoloijoagjmpagm?utm_source=item-share-cb
 - Auto Scroll: https://chromewebstore.google.com/detail/fkddbgkhajohfjdacldgagfdfckejdni?utm_source=item-share-cb
 - mathbox: https://chromewebstore.google.com/detail/nkbgidaebkndnjnndagnfbphcjnljjbh?utm_source=item-share-cb
 
